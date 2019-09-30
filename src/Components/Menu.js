@@ -11,12 +11,18 @@ class Menu extends Component {
             <button className="" onClick={() => this.props.scramble()}>Scramble</button>
         </div>
         <div>
-            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "X", this.props.orientation)}>X</button>
-            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "XC", this.props.orientation)}>X'</button>
-            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "Y", this.props.orientation)}>Y</button>
-            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "YC", this.props.orientation)}>Y'</button>
-            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "Z", this.props.orientation)}>Z</button>
-            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "ZC", this.props.orientation)}>Z'</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "U", this.props.orientation)}>U</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "UC", this.props.orientation)}>U'</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "L", this.props.orientation)}>L</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "LC", this.props.orientation)}>L'</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "R", this.props.orientation)}>R</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "RC", this.props.orientation)}>R'</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "F", this.props.orientation)}>F</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "FC", this.props.orientation)}>F'</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "B", this.props.orientation)}>B</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "BC", this.props.orientation)}>B'</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "D", this.props.orientation)}>D</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "DC", this.props.orientation)}>D'</button>
         </div>
         <div>
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "X", this.props.orientation)}>X</button>
@@ -25,6 +31,9 @@ class Menu extends Component {
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "YC", this.props.orientation)}>Y'</button>
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "Z", this.props.orientation)}>Z</button>
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "ZC", this.props.orientation)}>Z'</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "1", this.props.orientation)}>→</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "2", this.props.orientation)}>←</button>
+            {/* ⇽⟳⇾ ← */}
         </div>
     </div>
     );

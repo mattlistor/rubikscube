@@ -21,7 +21,7 @@ class Layout extends Component {
     }
 
     numberOScrambleMoves = () => {
-        return 30
+        return 20
     }
 
     state = {
@@ -57,8 +57,6 @@ class Layout extends Component {
             i += 1
         }, 80)            
     }
-
-
 
     rotate = (key, orientation) => {
         // console.log(orientation)
@@ -386,29 +384,41 @@ class Layout extends Component {
                 var nextOrientation = this.rotate("X", this.rotate("X", this.rotate("X", orientation)))
             }
             if(key === "Z"){
-                var nextOrientation = orientation
-                let toprow1 = nextOrientation.F[0][1] 
-                let toprow2 = nextOrientation.F[1][1] 
-                let toprow3 = nextOrientation.F[2][1] 
-    
-                nextOrientation.F[0][1] = nextOrientation.L[1][0]
-                nextOrientation.F[1][1] = nextOrientation.L[1][1]
-                nextOrientation.F[2][1] = nextOrientation.L[1][2]
-                
-                nextOrientation.L[1][0] = orientation.B[0][1]
-                nextOrientation.L[1][1] = orientation.B[1][1]
-                nextOrientation.L[1][2] = orientation.B[2][1]
-    
-                nextOrientation.B[0][1] = orientation.R[1][0]
-                nextOrientation.B[1][1] = orientation.R[1][1]
-                nextOrientation.B[2][1] = orientation.R[1][2]
-    
-                nextOrientation.R[1][0] = toprow1
-                nextOrientation.R[1][1] = toprow2
-                nextOrientation.R[1][2] = toprow3        
+                var nextOrientation = this.rotate("ZC", this.rotate("ZC", this.rotate("ZC", orientation)))
             }
             if(key === "ZC"){
-                var nextOrientation = this.rotate("Z", this.rotate("Z", this.rotate("Z", orientation)))
+                var nextOrientation = orientation
+                let toprow1 = nextOrientation.F[1][0] 
+                let toprow2 = nextOrientation.F[1][1] 
+                let toprow3 = nextOrientation.F[1][2] 
+    
+                nextOrientation.F[1][0] = nextOrientation.L[0][1]
+                nextOrientation.F[1][1] = nextOrientation.L[1][1]
+                nextOrientation.F[1][2] = nextOrientation.L[2][1]
+                
+                nextOrientation.L[0][1] = orientation.B[1][2]
+                nextOrientation.L[1][1] = orientation.B[1][1]
+                nextOrientation.L[2][1] = orientation.B[1][0]
+    
+                nextOrientation.B[1][0] = orientation.R[0][1]
+                nextOrientation.B[1][1] = orientation.R[1][1]
+                nextOrientation.B[1][2] = orientation.R[2][1]
+    
+                nextOrientation.R[2][1] = toprow1
+                nextOrientation.R[1][1] = toprow2
+                nextOrientation.R[0][1] = toprow3     
+            }
+            if(key === "1"){
+                var nextOrientation = this.rotate("ZC", this.rotate("UC", this.rotate("D", orientation)))
+            }
+            if(key === "2"){
+                var nextOrientation = this.rotate("Z", this.rotate("U", this.rotate("DC", orientation)))
+            }
+            if(key === "3"){
+                var nextOrientation = this.rotate("ZC", this.rotate("UC", this.rotate("D", orientation)))
+            }
+            if(key === "4"){
+                var nextOrientation = this.rotate("Z", this.rotate("U", this.rotate("DC", orientation)))
             }
         }
         return nextOrientation
@@ -462,15 +472,15 @@ class Layout extends Component {
         
     }
 
-    moveFromButton = (event, side, orientation) => {
-        event.preventDefault()
+    moveFromButton = (event, key, orientation) => {
         this.setState({
-            orientation: this.rotate(side, orientation)
+            orientation: this.rotate(key, orientation)
         })  
     }
   
     render(){
     return (
+    <>
       <div className="Layout" orientation={this.state.orientation}>
         <div className="column1">
             {/* <button className="centerRowButton2" onClick={() => console.log("penguin")}></button> */}
@@ -484,16 +494,18 @@ class Layout extends Component {
             {/* <button className="centerRowButton" onClick={() => console.log("penguin")}></button> */}
         </div>
         <div className="column3">
-            <div className="blankTop"></div>
+            {/* <div className="blankTop"></div> */}
             <div className="blankMiddle">
                 <Side face="R" move={this.move} orientation={this.state.orientation} sideOrientation={this.state.orientation.R}/>
                 <Side face="D" move={this.move} orientation={this.state.orientation} sideOrientation={this.state.orientation.D}/>
             </div>
-            <div className="blankBottom">
+            {/* <div className="blankBottom">
                 <Menu orientation={this.state.orientation} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
-            </div>
+            </div> */}
         </div>
       </div>
+      <Menu orientation={this.state.orientation} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
+    </>
     );
   }
   
