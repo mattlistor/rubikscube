@@ -2,6 +2,9 @@
   text-align: center;
   display: flex;
   justify-content: center;
+  /* flex-direction: column; */
+  font-family: 'Inconsolata', monospace;
+
 }
 
 .App-logo {
@@ -32,6 +35,7 @@
   border-radius: 10px;
   padding: 30px;
   margin-top: 2%;
+  /* width: 90%; */
 }
 
 .Side {
@@ -126,7 +130,7 @@
 .Menu{
   font-family: 'Inconsolata', monospace;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 25px;
   color: white;
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -149,6 +153,7 @@ div#content{
 }
 
 button {
+  outline: none;
   font-family: 'Inconsolata', monospace;
   font-weight: bold;
   background-color: #000000;
@@ -169,37 +174,17 @@ button:hover {
   background-color: #ffffff;
 }
 
-button.centerRowButton{
-  background-color: black;
-  border-radius: 10px;
-  width: 95%;
-  height: 15px;
-  padding:0px;
-  border: 2px solid black;
-  margin: 5px;
-}
-
-button.centerRowButton:hover{
+button.moveButton{
+  font-family: 'Inconsolata', monospace;
+  font-weight: bold;
+  background-color: white;
   color: black;
-  transition-duration: 0.4s;
-  cursor: pointer;
-  background-color: #ffffff;
-}
-
-button.centerRowButton2{
-  background-color: black;
-  border-radius: 10px;
-  width: 15px;
-  height: 150px;
-  padding:0px;
-  border: 2px solid black;
-  margin: 5px;
-}
-
-button.centerRowButton2:hover{
-  color: black;
-  transition-duration: 0.4s;
-  cursor: pointer;
-  background-color: #ffffff;
+  border: 0px solid black;
+  padding: 0px;
+  padding-right:15px;
+  padding-left:15px; 
+  font-size: 16px;
+  margin-right: 0px;
+  margin-left: 0px;
 }
 

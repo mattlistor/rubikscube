@@ -8,6 +8,7 @@ class App extends Component {
   render(){
     return (
       <div className="App">
+          <div id="content">Rubik's Cube</div>
         <Layout />
       </div>
     );
