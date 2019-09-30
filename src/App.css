@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .App-logo {
@@ -20,3 +22,184 @@
 .App-link {
   color: #09d3ac;
 }
+
+.Layout{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(231, 231, 231);
+  /* border: solid; */
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 2%;
+}
+
+.Side {
+  margin: 5px;
+  border: solid 5px;
+  border-radius: 10px;
+  background-color: black;
+}
+
+/* Rows */
+.topRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.midRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.botRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.tile {
+  border-radius: 9px;
+  border: solid 3px;
+  margin:0px;
+  height: 7vh;
+  width: 7vh;
+
+  font-family: 'Inconsolata', monospace;
+  font-weight: bold;
+  font-size: 15px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition-duration: 0.1s;
+}
+
+/* Tiles Colors */
+.tile#B {
+  background-color: #4066b3;
+}
+.tile#R {
+  background-color: #a11818;
+}
+.tile#Y {
+  background-color: #e2d523;
+}
+.tile#W {
+  background-color: #ffffff;
+}
+.tile#G {
+  background-color: #478b2c;
+}
+.tile#O {
+  background-color: #cf7f07;
+}
+
+/* Columns */
+.column1{
+  display: flex;
+  flex-direction: row;
+}
+.column2{
+  display: flex;
+  flex-direction: column;
+}
+.column3{
+  display: flex;
+  flex-direction: column;
+}
+.blankTop{
+  background-color: rgb(231, 231, 231);
+  margin: 5px;
+  height: 120px;
+  border: solid 20px;
+  border-color: rgb(231, 231, 231);
+  padding: 20px;
+
+
+
+}
+.blankMiddle{
+  display:flex;
+  flex-direction: row;
+}
+.Menu{
+  font-family: 'Inconsolata', monospace;
+  font-weight: bold;
+  font-size: 30px;
+  color: white;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+    align-items: center;
+
+  margin: 5px;
+  height: 120px;
+  border: solid 20px;
+  border-color:rgb(231, 231, 231);
+  border-radius: 27px;
+  padding: 20px;
+
+}
+div#content{
+  color: rgb(0, 0, 0);
+  margin-bottom: 10px;
+
+}
+
+button {
+  font-family: 'Inconsolata', monospace;
+  font-weight: bold;
+  background-color: #000000;
+  color: white;
+  border: 2px solid black;
+  padding: 8px;
+  padding-right:20px;
+  padding-left:20px;
+  font-size: 16px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+button:hover {
+  color: black;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+button.centerRowButton{
+  background-color: black;
+  border-radius: 10px;
+  width: 95%;
+  height: 15px;
+  padding:0px;
+  border: 2px solid black;
+  margin: 5px;
+}
+
+button.centerRowButton:hover{
+  color: black;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+button.centerRowButton2{
+  background-color: black;
+  border-radius: 10px;
+  width: 15px;
+  height: 150px;
+  padding:0px;
+  border: 2px solid black;
+  margin: 5px;
+}
+
+button.centerRowButton2:hover{
+  color: black;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
