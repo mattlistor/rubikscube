@@ -28,7 +28,7 @@ class Layout extends Component {
 
     scramble = () => {
         const NUMBER_OF_MOVES = 20
-        let moveSet = ["U", "UC", "D", "DC", "R", "RC", "L", "LC", "F", "FC", "B", "BC", ]
+        let moveSet = ["U", "UC", "D", "DC", "R", "RC", "L", "LC", "F", "FC", "B", "BC", "X", "XC"]
 
         this.setState({scrambling: !this.state.scrambling})
         let i = 1
@@ -48,7 +48,6 @@ class Layout extends Component {
                 clearInterval(t)
             }
             i += 1
-            // console.log(i)
         }, 80)            
     }
 
@@ -328,6 +327,28 @@ class Layout extends Component {
         if(key === "FC"){
             var nextOrientation = this.rotate("F", this.rotate("F", this.rotate("F", orientation)))
         }
+        if(key === "Y"){
+            var nextOrientation = orientation
+            let toprow1 = nextOrientation.U[0][1] 
+            let toprow2 = nextOrientation.U[1][1] 
+            let toprow3 = nextOrientation.U[2][1] 
+
+            nextOrientation.U[0][1] = nextOrientation.F[0][1]
+            nextOrientation.U[1][1] = nextOrientation.F[1][1]
+            nextOrientation.U[2][1] = nextOrientation.F[2][1]
+            
+            nextOrientation.F[0][1] = orientation.D[2][1]
+            nextOrientation.F[1][1] = orientation.D[1][1]
+            nextOrientation.F[2][1] = orientation.D[0][1]
+
+            nextOrientation.D[2][1] = orientation.B[0][1]
+            nextOrientation.D[1][1] = orientation.B[1][1]
+            nextOrientation.D[0][1] = orientation.B[2][1]
+
+            nextOrientation.B[0][1] = toprow1
+            nextOrientation.B[1][1] = toprow2
+            nextOrientation.B[2][1] = toprow3        
+        }
 
         
         return nextOrientation
@@ -379,7 +400,57 @@ class Layout extends Component {
             orientation: nextOrientation
         })
         
-      }
+    }
+
+    moveFromButton = (side, orientation) => {
+        var nextOrientation = orientation
+        console.log("HEYYYY")
+        if (side === "U"){
+            nextOrientation = this.rotate("U", orientation)
+        }
+        if(side === "UC"){
+            nextOrientation = this.rotate("UC", orientation)
+        }
+        if(side === "D"){
+            nextOrientation = this.rotate("D", orientation)
+        }
+        if(side === "DC"){
+            nextOrientation = this.rotate("DC", orientation)
+        }
+        if(side === "R"){
+            nextOrientation = this.rotate("R", orientation)
+        }
+        if(side === "RC"){
+            nextOrientation = this.rotate("RC", orientation)
+        }
+        if(side === "L"){
+            nextOrientation = this.rotate("L", orientation)
+        }
+        if(side === "LC"){
+            nextOrientation = this.rotate("LC", orientation)
+        }
+        if(side === "B"){
+            nextOrientation = this.rotate("B", orientation)
+        }
+        if(side === "BC"){
+            nextOrientation = this.rotate("BC", orientation)
+        }
+        if(side === "F"){
+            nextOrientation = this.rotate("F", orientation)
+        }
+        if(side === "FC"){
+            nextOrientation = this.rotate("FC", orientation)
+        }
+        if(side === "Y"){
+            nextOrientation = this.rotate("Y", orientation)
+        }
+        
+
+        this.setState({
+            orientation: nextOrientation
+        })
+        
+    }
   
     render(){
     return (
@@ -402,7 +473,7 @@ class Layout extends Component {
                 <Side face="D" move={this.move} orientation={this.state.orientation} sideOrientation={this.state.orientation.D}/>
             </div>
             <div className="blankBottom">
-                <Menu orientation={this.state.orientation} scramble={this.scramble} solve={this.solve}/>
+                <Menu orientation={this.state.orientation} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
             </div>
         </div>
       </div>
