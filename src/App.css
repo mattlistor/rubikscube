@@ -173,7 +173,11 @@ div#content{
   color:rgb(255, 251, 0);
 
 }
+div#content2{
+  margin: 0px;
+  color:rgb(255, 255, 255);
 
+}
 button {
   outline: none;
   font-family: 'Inconsolata', monospace;
@@ -222,5 +226,25 @@ button.moveButton:hover{
   /* transition-duration: 0.4s; */
   cursor: pointer;
   color:rgb(255, 251, 0);
+}
+
+.Header{
+  font-weight: bold;
+  font-size: 25px;
+  /* color: rgb(255, 251, 0); */
+  color: rgb(255, 255, 255);
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* margin: 5px; */
+  /* height: 120px; */
+  /* border: solid 3px; */
+  border-color:black;
+  /* border-radius: 27px; */
+  /* padding: 20px; */
+  width: 637px;
 }
 

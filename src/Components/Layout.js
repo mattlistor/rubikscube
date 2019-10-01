@@ -84,7 +84,9 @@ class Layout extends Component {
                             ["D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "D", "Z", "UC", "Z", "D", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "U", "U"],
                             ["BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", ],
                             ["X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z"],
-                            ["X", "X", "Y", "Y", "Z", "Z"]]
+                            ["X", "X", "Y", "Y", "Z", "Z"], 
+                            ["F", "B", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "BC", "FC"],
+                            ["F", "B", "5", "5", "X", "BC", "BC", "FC", "BC", "6", "6", "XC", "B", "B", "F", "B", "5", "5", "X", "BC", "BC", "FC", "BC", "6", "6", "XC", "B", "B", "F", "B", "5", "5", "X", "BC", "BC", "FC", "BC", "6", "6", "XC", "B", "B", "F", "B", "5", "5", "X", "BC", "BC", "FC", "BC", "6", "6", "XC", "B", "B"]]
 
         let chosenMoveSet = localMoveSet[Math.floor(Math.random()*localMoveSet.length)];
         let t = setInterval(() => {
@@ -106,7 +108,9 @@ class Layout extends Component {
     }
 
     rotate = (key, orientation) => {
-        // console.log(orientation)
+        // const loseSound = document.querySelector('.loseSound')
+        // loseSound.volume = '1'
+        // loseSound.play()
         if (key){
             if(key === "U"){
                 var nextOrientation = orientation
@@ -377,9 +381,6 @@ class Layout extends Component {
             if(key === "FC"){
                 var nextOrientation = this.rotate("F", this.rotate("F", this.rotate("F", orientation)))
             }
-            if(key === "FC"){
-                var nextOrientation = this.rotate("F", this.rotate("F", this.rotate("F", orientation)))
-            }
             if(key === "Y"){
                 var nextOrientation = orientation
                 let toprow1 = nextOrientation.U[0][1] 
@@ -462,11 +463,16 @@ class Layout extends Component {
                 var nextOrientation = this.rotate("Z", this.rotate("U", this.rotate("DC", orientation)))
             }
             if(key === "3"){
-                console.log("3")
-                var nextOrientation = this.rotate("X", this.rotate("BC", this.rotate("F", orientation)))
+                var nextOrientation = this.rotate("Y", this.rotate("R", this.rotate("LC", orientation)))
             }
             if(key === "4"){
-                var nextOrientation = this.rotate("Z", this.rotate("U", this.rotate("DC", orientation)))
+                var nextOrientation = this.rotate("YC", this.rotate("RC", this.rotate("L", orientation)))
+            }
+            if(key === "5"){
+                var nextOrientation = this.rotate("X", this.rotate("F", this.rotate("BC", orientation)))
+            }
+            if(key === "6"){
+                var nextOrientation = this.rotate("XC", this.rotate("FC", this.rotate("B", orientation)))
             }
         }
         return nextOrientation
@@ -521,6 +527,7 @@ class Layout extends Component {
     }
 
     moveFromButton = (event, key, orientation) => {
+        event.preventDefault()
         this.setState({
             orientation: this.rotate(key, orientation)
         })  
@@ -531,7 +538,9 @@ class Layout extends Component {
     <>
       {/* <div className="title">Rubik's Cube</div> */}
       {/* <Menu orientation={this.state.orientation} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/> */}
-
+      {/* <div className="Header">        
+        <div id="content2">Rubik's Cube</div> 
+      </div> */}
       <div className="Layout" orientation={this.state.orientation}>
         <div className="column1">
             {/* <button className="centerRowButton2" onClick={() => console.log("penguin")}></button> */}
