@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
+import UIfx from 'uifx'; 
 import Side from './Side.js';
 import Menu from './Menu.js';
 import '../App.css';
-
-
+import moveSound from "https://s1.vocaroo.com/media/download_temp/Vocaroo_s1O1gpbGjJ8v.mp3";
 
 class Layout extends Component {
     solvedState = () =>{
@@ -56,6 +56,53 @@ class Layout extends Component {
             }
             i += 1
         }, 80)            
+    }
+
+    pattern = () => {
+        const NUMBER_OF_MOVES = this.numberOScrambleMoves()
+        this.setState({scrambling: !this.state.scrambling})
+        const sound = new UIfx({asset: moveSound});
+        sound.play();
+
+        let i = 0
+        //blend
+        // let localMoveSet = [["D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC"]]
+        
+        // blend back and forth
+        // let localMoveSet = [["D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "D", "Z", "UC"]]
+        // let localMoveSet = [["D", "Z", "UC", "D", "DC", "U", "ZC", "DC", "D", "Z", "UC", "D", "D", "Z", "UC", "D", "D", "D"]]
+        
+        // cascade down 
+        // let localMoveSet = [["BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", ]]
+
+        // checkers
+        // let localMoveSet = ["X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z"]
+        // let localMoveSet = ["X", "X", "Y", "Y", "Z", "Z"]
+
+         
+        let localMoveSet = [["D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC","D", "Z", "UC"],
+                            ["D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "UC", "Z", "D", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "UC", "D", "Z", "UC", "Z", "D", "D", "Z", "UC", "D", "Z", "UC","D", "Z", "U", "U"],
+                            ["BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", "BC", "X", "F", ],
+                            ["X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z", "X", "Y", "Z"],
+                            ["X", "X", "Y", "Y", "Z", "Z"]]
+
+        let chosenMoveSet = localMoveSet[Math.floor(Math.random()*localMoveSet.length)];
+        let t = setInterval(() => {
+            if (i < chosenMoveSet.length && this.state.scrambling){
+                let move = chosenMoveSet[i]
+                console.log(move)
+                this.setState({
+                    orientation: this.rotate(move, this.state.orientation), 
+                })
+            }
+            else {
+                this.setState({
+                    scrambling: false
+                })
+                clearInterval(t)
+            }
+            i += 1
+        }, 90)            
     }
 
     rotate = (key, orientation) => {
@@ -415,7 +462,8 @@ class Layout extends Component {
                 var nextOrientation = this.rotate("Z", this.rotate("U", this.rotate("DC", orientation)))
             }
             if(key === "3"){
-                var nextOrientation = this.rotate("ZC", this.rotate("UC", this.rotate("D", orientation)))
+                console.log("3")
+                var nextOrientation = this.rotate("X", this.rotate("BC", this.rotate("F", orientation)))
             }
             if(key === "4"){
                 var nextOrientation = this.rotate("Z", this.rotate("U", this.rotate("DC", orientation)))
@@ -481,6 +529,9 @@ class Layout extends Component {
     render(){
     return (
     <>
+      {/* <div className="title">Rubik's Cube</div> */}
+      {/* <Menu orientation={this.state.orientation} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/> */}
+
       <div className="Layout" orientation={this.state.orientation}>
         <div className="column1">
             {/* <button className="centerRowButton2" onClick={() => console.log("penguin")}></button> */}
@@ -503,8 +554,10 @@ class Layout extends Component {
                 <Menu orientation={this.state.orientation} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
             </div> */}
         </div>
+        {/* <Menu orientation={this.state.orientation} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/> */}
+
       </div>
-      <Menu orientation={this.state.orientation} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
+      <Menu orientation={this.state.orientation} pattern={this.pattern} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
     </>
     );
   }

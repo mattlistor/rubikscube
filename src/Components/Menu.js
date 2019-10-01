@@ -9,6 +9,7 @@ class Menu extends Component {
         <div id="content">Rubik's Cube</div> 
             <button className="solve" onClick={() => this.props.solve()}>Solve!</button>
             <button className="" onClick={() => this.props.scramble()}>Scramble</button>
+            <button className="" onClick={() => this.props.pattern()}>Pattern</button>
         </div>
         <div>
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "U", this.props.orientation)}>U</button>
@@ -31,9 +32,16 @@ class Menu extends Component {
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "YC", this.props.orientation)}>Y'</button>
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "Z", this.props.orientation)}>Z</button>
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "ZC", this.props.orientation)}>Z'</button>
-            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "1", this.props.orientation)}>→</button>
-            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "2", this.props.orientation)}>←</button>
-            {/* ⇽⟳⇾ ← */}
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "2", this.props.orientation)}>⟵</button>
+
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "2", this.props.orientation)}>↑</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "1", this.props.orientation)}>⟶</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "2", this.props.orientation)}>↓</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "3", this.props.orientation)}>⟳</button>
+            <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "2", this.props.orientation)}>⟲</button>
+
+
+            {/* ⇽⟳↑↓⇾ ← ⟶*/}
         </div>
     </div>
     );

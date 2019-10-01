@@ -7,6 +7,12 @@
   font-family: 'Inconsolata', monospace;
 
 }
+.title {
+  font-size: calc(10px + 2vmin);
+  margin-top: 10px;
+  font-weight: bold;
+  color: #0032bc;
+}
 
 .App-logo {
   height: 40vmin;
@@ -31,18 +37,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: rgb(231, 231, 231); */
+  background-color: white;
   /* border: solid; */
   /* border-radius: 10px; */
-  padding: 30px;
-  /* margin-top: 2%; */
+  padding: 20px;
+  margin-top: 2%;
   width: auto;
 }
 
 .Side {
   margin: 5px;
-  border: solid 1px;
-  /* border-radius: 10px; */
+  border: solid 3px;
+  border-radius: 3px;
   background-color: black;
 }
 
@@ -63,11 +69,11 @@
 }
 
 .tile {
-  /* border-radius: 9px; */
+  border-radius: 5px;
   border: solid 2px;
   margin:0px;
-  height: 7vh;
-  width: 7vh;
+  height: 6vh;
+  width: 6vh;
 
   font-family: 'Inconsolata', monospace;
   font-weight: bold;
@@ -82,7 +88,25 @@
 
 /* Tiles Colors */
 .tile#B {
-  background-color: #4066b3;
+  background-color: #0b2afb;
+}
+.tile#R {
+  background-color: #fc0d1b;
+}
+.tile#Y {
+  background-color: #ebe932;
+}
+.tile#W {
+  background-color: #ffffff;
+}
+.tile#G {
+  background-color: #3cd947;
+}
+.tile#O {
+  background-color: #fd8824;
+}
+/* .tile#B {
+  background-color: #0b2afb;
 }
 .tile#R {
   background-color: #a11818;
@@ -98,7 +122,7 @@
 }
 .tile#O {
   background-color: #cf7f07;
-}
+} */
 
 /* Columns */
 .column1{
@@ -130,7 +154,7 @@
   font-size: 25px;
   /* color: rgb(255, 251, 0); */
   color: rgb(255, 255, 255);
-  background-color: #0032bc;
+  background-color: #0b2afb;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -142,7 +166,7 @@
   border-color:black;
   /* border-radius: 27px; */
   padding: 20px;
-
+  width: 637px;
 }
 div#content{
   margin-bottom: 10px;
@@ -163,24 +187,26 @@ button {
   font-size: 16px;
   margin-right: 5px;
   margin-left: 5px;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 button:hover {
-  background-color: #0032bc;
+  background-color: #0b2afb;
   font-weight: bold;
   color: rgb(255, 251, 0);
   /* transition-duration: 0.4s; */
   cursor: pointer;
   /* background-color: #0032bc; */
-  border-color: #0032bc;
+  border-color: #0b2afb;
+  /* border-color:rgb(255, 251, 0); */
+
 
 }
 
 button.moveButton{
   font-family: 'Inconsolata', monospace;
   font-weight: bold;
-  background-color: #0032bc;
+  background-color: #0b2afb;
   color: white;
   border: 0px solid black;
   padding: 0px;
