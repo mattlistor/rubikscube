@@ -10,6 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <Layout />
+        <audio controls volume = "1" class = 'loseSound' hidden src={"https://s1.vocaroo.com/media/download_temp/Vocaroo_s1O1gpbGjJ8v.mp3"}></audio>
       </div>
     );
   }

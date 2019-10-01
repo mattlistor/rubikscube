@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import UIfx from 'uifx'; 
+// import UIfx from 'uifx'; 
 import Side from './Side.js';
 import Menu from './Menu.js';
 import '../App.css';
-import moveSound from "https://s1.vocaroo.com/media/download_temp/Vocaroo_s1O1gpbGjJ8v.mp3";
+// import moveSound from './lose.mp3';
 
 class Layout extends Component {
     solvedState = () =>{
@@ -61,8 +61,8 @@ class Layout extends Component {
     pattern = () => {
         const NUMBER_OF_MOVES = this.numberOScrambleMoves()
         this.setState({scrambling: !this.state.scrambling})
-        const sound = new UIfx({asset: moveSound});
-        sound.play();
+        // const sound = new UIfx({asset: moveSound});
+        // sound.play();
 
         let i = 0
         //blend
