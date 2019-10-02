@@ -75,7 +75,6 @@ class Layout extends Component {
         let t = setInterval(() => {
             if (i < NUMBER_OF_MOVES && this.state.scrambling){
                 let move = this.moveSet()[Math.floor(Math.random()* this.moveSet().length)]
-                console.log(move)
                 this.setState({
                     orientation: this.rotate(move, this.state.orientation), 
                 })
@@ -88,6 +87,20 @@ class Layout extends Component {
             }
             i += 1
         }, 80)            
+    }
+
+    execute = (movesetString) => {
+        let movesetArray = movesetString.split(',');
+        let i = 0
+        let t = setInterval(() => {
+            if (i < movesetArray.length){
+                this.setState({orientation: this.rotate(movesetArray[i], this.state.orientation)})
+            }
+            else {
+                clearInterval(t)
+            }
+            i += 1
+        }, 80) 
     }
 
     pattern = () => {
@@ -124,7 +137,6 @@ class Layout extends Component {
         let t = setInterval(() => {
             if (i < chosenMoveSet.length && this.state.scrambling){
                 let move = chosenMoveSet[i]
-                console.log(move)
                 this.setState({
                     orientation: this.rotate(move, this.state.orientation), 
                 })
@@ -637,20 +649,26 @@ class Layout extends Component {
         fetch("http://localhost:3000/movesets")
         .then(res => res.json())
         //FILTERS THROUGH ALL THE MOVESETS CREATED - RETURN A LIST OF THE CURRENT USER'S MOVESETS 
-        .then(data => )
-        
-        this.setState({viewingLogs: !this.state.viewingLogs, allUsersLogs:data.filter((log) => parseInt(log.user_id) === parseInt(this.state.user_id))})
+        .then(data => {
+                let newArray = data.filter((log) => parseInt(log.user_id) === parseInt(this.state.user_id))
+                this.setState(
+                    {
+                        viewingLogs: !this.state.viewingLogs, 
+                        allUsersLogs: newArray
+                    }
+                )
+            }
+        )
     }
   
     render(){
-        console.log(this.state.viewingLogs)
     return (
     <>
     {this.state.loggedIn ?
 
     // LOGGED IN
     <>
-      {/* {this.state.username} */}
+      {/* {this.state.allUsersLogs} */}
       <div className="Layout" orientation={this.state.orientation}>
         <div className="column1">
             <Side face="L" move={this.move} orientation={this.state.orientation} sideOrientation={this.state.orientation.L}/>
@@ -676,7 +694,7 @@ class Layout extends Component {
         </div>
       </div>
        <br></br>
-      <Menu viewingLogs={this.state.viewingLogs} username={this.state.username} viewLogs={this.viewLogs} submitLog={this.submitLog} clearLog={this.clearLog} logging={this.state.logging} orientation={this.state.orientation} beginLog={this.beginLog} pattern={this.pattern} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
+      <Menu execute={this.execute} allUsersLogs={this.state.allUsersLogs} viewingLogs={this.state.viewingLogs} username={this.state.username} viewLogs={this.viewLogs} submitLog={this.submitLog} clearLog={this.clearLog} logging={this.state.logging} orientation={this.state.orientation} beginLog={this.beginLog} pattern={this.pattern} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
     </> :
 
     // NOT LOGGED IN

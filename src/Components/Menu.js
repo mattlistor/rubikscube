@@ -1,27 +1,38 @@
 import React, { Component } from 'react'
+import Moveset from './Moveset.js';
+
 import '../App.css';
 
 class Menu extends Component {
+  createMovesetComponents = () => {
+    return this.props.allUsersLogs.map((moveset) => <Moveset execute={this.props.execute} set={moveset.set} key={moveset.id}/>)
+  }
+  
   render(){
     return (
      <div className="Menu"> 
+        {this.props.viewingLogs ? 
+              <>
+                <div>
+                <button align="left" onClick={() => this.props.viewLogs()}>Back to Menu</button>
+                <button className="solve" onClick={() => this.props.solve()}>Solve!</button>
+                </div>
+                {this.createMovesetComponents()}
+              </>
+        :
+            <>
         <div>
-        <div id="content">{this.props.username} - Rubik's Cube</div> 
+            <div id="content">{this.props.username} - Rubik's Cube</div> 
             <button className="solve" onClick={() => this.props.solve()}>Solve!</button>
             <button className="" onClick={() => this.props.scramble()}>Scramble</button>
             <button className="" onClick={() => this.props.pattern()}>Pattern</button>
+
             {this.props.logging ? 
             <><button className="logging" onClick={(e) => this.props.submitLog(e)}>Submit Log </button>
             <button className="" onClick={() => this.props.clearLog()}>Clear Log </button></>:
             <><button className="notLogging" onClick={() => this.props.beginLog()}>Begin Log</button>
             <button onClick={() => this.props.viewLogs()}>View Logs</button></>}
         </div>
-        {this.props.viewingLogs ? 
-              <>
-              hi
-              </>
-        :
-            <>
         <div>
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "U", this.props.orientation)}>U</button>
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "UC", this.props.orientation)}>U'</button>
