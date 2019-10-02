@@ -28,7 +28,35 @@ class Layout extends Component {
         orientation: this.solvedState(),
         scrambling: false, 
         logging: false,
-        log: []
+        log: [],
+        allUsersLogs: [],
+        loggedIn: false,
+        username: "",
+        user_id: 0
+    }
+
+    handleChange = (e) => {
+        e.preventDefault()
+        this.setState({username: e.target.value})
+    }
+
+    logIn = (e) => {
+        e.preventDefault()
+
+        const data = {name: this.state.username}
+                
+        fetch("http://localhost:3000/users", {
+            method: 'POST', 
+            body: JSON.stringify(data), // data can be `string` or {object}
+            headers: {
+                Accept: 'application/json',  
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(fetch("http://localhost:3000/users")
+        .then(res => res.json())
+        .then(data => this.setState({loggedIn: true, user_id: data[data.length-1].id})))
+
     }
 
     solve = () => {
@@ -575,10 +603,9 @@ class Layout extends Component {
         if (this.state.log.toString()){
             const data = {
                 set: this.state.log.toString(),
-                user_id: 1
-                // NEEDS TO BE THE USER THATS LOGGED IN 
+                user_id: this.state.user_id
+                // NEEDS TO BE THE ID OF USER THATS LOGGED IN 
             }
-
                     
             fetch("http://localhost:3000/movesets", {
                 method: 'POST', 
@@ -590,8 +617,7 @@ class Layout extends Component {
             });
         }
 
-        
-        this.setState({logging: false})
+        this.setState({log: [], logging: false})
 
     }
 
@@ -604,11 +630,24 @@ class Layout extends Component {
     clearLog = () => {
         this.setState({log: [], logging: false})
     }
+
+    viewLogs = () => {
+        fetch("http://localhost:3000/movesets")
+        .then(res => res.json())
+        .then(data => console.log(data.filter((log) => parseInt(log.user_id) === parseInt(this.state.user_id))))
+        // log.user_id === <--WHATEVER THE ID IS OF THE LOGGED IN USER-->
+        // this.setState({allUsersLogs: data.filter((log) => log.user_id === this.state.user_id)})
+    }
   
     render(){
-        console.log(this.state.log)
+        console.log(this.state.allUserLogs)
     return (
     <>
+    {this.state.loggedIn ?
+
+    // LOGGED IN
+    <>
+      {this.state.user_id}
       <div className="Layout" orientation={this.state.orientation}>
         <div className="column1">
             <Side face="L" move={this.move} orientation={this.state.orientation} sideOrientation={this.state.orientation.L}/>
@@ -627,15 +666,27 @@ class Layout extends Component {
             {/* <div className="blankBottom">{this.state.log.toString()} */}
                 <form>
                     <label>
-                        <textarea className="blankBottom"  wrap="hard" type="text" name="name" value={this.generateLogString()} />
+                        <textarea className="blankBottom"  onChange={()=> console.log("pegnuin")} wrap="hard" type="text" name="name" value={this.generateLogString()} />
                     </label>
                 </form>
             {/* </div> */}
         </div>
       </div>
-      {/* {this.state.log.toString()}  */}
        <br></br>
-      <Menu submitLog={this.submitLog} clearLog={this.clearLog} logging={this.state.logging} orientation={this.state.orientation} beginLog={this.beginLog} pattern={this.pattern} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
+      <Menu viewLogs={this.viewLogs} submitLog={this.submitLog} clearLog={this.clearLog} logging={this.state.logging} orientation={this.state.orientation} beginLog={this.beginLog} pattern={this.pattern} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
+    </> :
+
+    // NOT LOGGED IN
+    <>
+    <form>
+        <label>
+            Name:
+            <input type="text" name="name" onChange={(e) => this.handleChange(e)}/>
+        </label>
+    </form>
+    <button onClick={(e) => this.logIn(e)}>Click!</button>
+    </>}
+    
     </>
     );
   }

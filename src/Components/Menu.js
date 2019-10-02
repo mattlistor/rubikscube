@@ -12,8 +12,9 @@ class Menu extends Component {
             <button className="" onClick={() => this.props.pattern()}>Pattern</button>
             {this.props.logging ? 
             <><button className="logging" onClick={(e) => this.props.submitLog(e)}>Submit Log </button>
-            <button className="" onClick={() => this.props.clearLog()}>Clear Log </button></>: 
-            <button className="notLogging" onClick={() => this.props.beginLog()}>Begin Log</button>}
+            <button className="" onClick={() => this.props.clearLog()}>Clear Log </button></>:
+            <><button className="notLogging" onClick={() => this.props.beginLog()}>Begin Log</button>
+            <button onClick={() => this.props.viewLogs()}>View Logs</button></>}
         </div>
         <div>
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "U", this.props.orientation)}>U</button>
