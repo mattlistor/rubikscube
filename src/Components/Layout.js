@@ -55,6 +55,7 @@ class Layout extends Component {
         })
         .then(fetch("http://localhost:3000/users")
         .then(res => res.json())
+                                                              // GRABS THE LAST USER (MOST RECENT LOGIN)
         .then(data => this.setState({loggedIn: true, user_id: data[data.length-1].id})))
 
     }
@@ -634,9 +635,8 @@ class Layout extends Component {
     viewLogs = () => {
         fetch("http://localhost:3000/movesets")
         .then(res => res.json())
+        //FILTERS THROUGH ALL THE MOVESETS CREATED - RETURN A LIST OF THE CURRENT USER'S MOVESETS 
         .then(data => console.log(data.filter((log) => parseInt(log.user_id) === parseInt(this.state.user_id))))
-        // log.user_id === <--WHATEVER THE ID IS OF THE LOGGED IN USER-->
-        // this.setState({allUsersLogs: data.filter((log) => log.user_id === this.state.user_id)})
     }
   
     render(){
@@ -666,7 +666,7 @@ class Layout extends Component {
             {/* <div className="blankBottom">{this.state.log.toString()} */}
                 <form>
                     <label>
-                        <textarea className="blankBottom"  onChange={()=> console.log("pegnuin")} wrap="hard" type="text" name="name" value={this.generateLogString()} />
+                        <textarea className="blankBottom"  onChange={() => null} wrap="hard" type="text" name="name" value={this.generateLogString()} />
                     </label>
                 </form>
             {/* </div> */}
@@ -677,15 +677,16 @@ class Layout extends Component {
     </> :
 
     // NOT LOGGED IN
-    <>
+    <div className="logIn">
+    <h1 className="login">Rubik's Cube</h1>
     <form>
         <label>
-            Name:
-            <input type="text" name="name" onChange={(e) => this.handleChange(e)}/>
+            <input type="text" align="center" name="name" placeholder="Name"onChange={(e) => this.handleChange(e)}/>
         </label>
+        <br></br>
+        <input type="submit" value="Enter" onClick={(e) => this.logIn(e)}/>
     </form>
-    <button onClick={(e) => this.logIn(e)}>Click!</button>
-    </>}
+    </div>}
     
     </>
     );
