@@ -32,7 +32,8 @@ class Layout extends Component {
         allUsersLogs: [],
         loggedIn: false,
         username: "",
-        user_id: 0
+        user_id: 0,
+        viewingLogs: false
     }
 
     handleChange = (e) => {
@@ -636,18 +637,20 @@ class Layout extends Component {
         fetch("http://localhost:3000/movesets")
         .then(res => res.json())
         //FILTERS THROUGH ALL THE MOVESETS CREATED - RETURN A LIST OF THE CURRENT USER'S MOVESETS 
-        .then(data => console.log(data.filter((log) => parseInt(log.user_id) === parseInt(this.state.user_id))))
+        .then(data => )
+        
+        this.setState({viewingLogs: !this.state.viewingLogs, allUsersLogs:data.filter((log) => parseInt(log.user_id) === parseInt(this.state.user_id))})
     }
   
     render(){
-        console.log(this.state.allUserLogs)
+        console.log(this.state.viewingLogs)
     return (
     <>
     {this.state.loggedIn ?
 
     // LOGGED IN
     <>
-      {this.state.user_id}
+      {/* {this.state.username} */}
       <div className="Layout" orientation={this.state.orientation}>
         <div className="column1">
             <Side face="L" move={this.move} orientation={this.state.orientation} sideOrientation={this.state.orientation.L}/>
@@ -673,18 +676,21 @@ class Layout extends Component {
         </div>
       </div>
        <br></br>
-      <Menu viewLogs={this.viewLogs} submitLog={this.submitLog} clearLog={this.clearLog} logging={this.state.logging} orientation={this.state.orientation} beginLog={this.beginLog} pattern={this.pattern} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
+      <Menu viewingLogs={this.state.viewingLogs} username={this.state.username} viewLogs={this.viewLogs} submitLog={this.submitLog} clearLog={this.clearLog} logging={this.state.logging} orientation={this.state.orientation} beginLog={this.beginLog} pattern={this.pattern} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
     </> :
 
     // NOT LOGGED IN
     <div className="logIn">
-    <h1 className="login">Rubik's Cube</h1>
+    {/* <h1 className="login">Rubik's Cube</h1> */}
+    <img className="login" src="https://i.imgur.com/ELfWJ7z.gif" width="295px"/>
     <form>
         <label>
-            <input type="text" align="center" name="name" placeholder="Name"onChange={(e) => this.handleChange(e)}/>
+            <input type="text" align="center" name="name" placeholder="NAME" onChange={(e) => this.handleChange(e)}/>
         </label>
         <br></br>
-        <input type="submit" value="Enter" onClick={(e) => this.logIn(e)}/>
+        <div className="instructions">Enter name and press ENTER</div>
+        <br></br>
+        <input hidden className="submitButton" type="submit" value="Enter" onClick={(e) => this.logIn(e)}/>
     </form>
     </div>}
     

@@ -6,7 +6,7 @@ class Menu extends Component {
     return (
      <div className="Menu"> 
         <div>
-        <div id="content">Rubik's Cube</div> 
+        <div id="content">{this.props.username} - Rubik's Cube</div> 
             <button className="solve" onClick={() => this.props.solve()}>Solve!</button>
             <button className="" onClick={() => this.props.scramble()}>Scramble</button>
             <button className="" onClick={() => this.props.pattern()}>Pattern</button>
@@ -16,6 +16,12 @@ class Menu extends Component {
             <><button className="notLogging" onClick={() => this.props.beginLog()}>Begin Log</button>
             <button onClick={() => this.props.viewLogs()}>View Logs</button></>}
         </div>
+        {this.props.viewingLogs ? 
+              <>
+              hi
+              </>
+        :
+            <>
         <div>
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "U", this.props.orientation)}>U</button>
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "UC", this.props.orientation)}>U'</button>
@@ -44,10 +50,11 @@ class Menu extends Component {
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "4", this.props.orientation)}>↓</button>
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "5", this.props.orientation)}>⟳</button>
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "6", this.props.orientation)}>⟲</button>
-
-
             {/* ⇽⟳↑↓⇾ ← ⟶*/}
         </div>
+        </>
+        }
+
     </div>
     );
   }
