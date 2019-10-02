@@ -17,8 +17,7 @@ class Layout extends Component {
     }
 
     moveSet = () => {
-        return ["U", "UC", "D", "DC", "R", "RC", "L", "LC", "F", "FC", "B", "BC", "Y", "YC", "X", "XC", "Z", "ZC"]
-
+        return ["U", "UC", "D", "DC", "R", "RC", "L", "LC", "F", "FC", "B", "BC", "Y", "YC", "X", "XC", "Z", "ZC", "1", "2", "3", "4", "5", "6"]
     }
 
     numberOScrambleMoves = () => {
@@ -572,24 +571,27 @@ class Layout extends Component {
     }
 
     submitLog = (e) => {
-        const data = {
-            set: this.state.log.toString(),
-            user_id: 1
-        }
-        
-        fetch(url, {
-            method: 'POST', 
-            body: JSON.stringify(data), // data can be `string` or {object}
-            headers: {
-              'Content-Type': 'application/json'
+        e.preventDefault()
+        if (this.state.log.toString()){
+            const data = {
+                set: this.state.log.toString(),
+                user_id: 1
+                // NEEDS TO BE THE USER THATS LOGGED IN 
             }
-          });
-          const json = await response.json();
-          console.log('Success:', JSON.stringify(json));
-        } catch (error) {
-          console.error('Error:', error);
+
+                    
+            fetch("http://localhost:3000/movesets", {
+                method: 'POST', 
+                body: JSON.stringify(data), // data can be `string` or {object}
+                headers: {
+                Accept: 'application/json',  
+                'Content-Type': 'application/json'
+                }
+            });
         }
-        this.setState({log: [], logging: false})
+
+        
+        this.setState({logging: false})
 
     }
 
