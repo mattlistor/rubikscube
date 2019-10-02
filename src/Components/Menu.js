@@ -4,9 +4,39 @@ import Moveset from './Moveset.js';
 import '../App.css';
 
 class Menu extends Component {
-  createMovesetComponents = () => {
-    return this.props.allUsersLogs.map((moveset) => <Moveset execute={this.props.execute} set={moveset.set} key={moveset.id}/>)
+  state = {
+    allUsersLogs: this.props.allUsersLogs
   }
+
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.userID !== prevProps.userID) {
+      this.fetchData(this.props.userID);
+    }
+  }
+
+  createMovesetComponents = () => {
+    return this.props.allUsersLogs.map((moveset) => <Moveset delete={this.delete} execute={this.props.execute} moveset={moveset} set={moveset.set} key={moveset.id}/>)
+  }
+      
+  delete = (id) => {
+    console.log("over here!")
+
+    fetch(`http://localhost:3000/movesets/${id}`, {method: 'DELETE'})
+    // .then(
+    //     fetch("http://localhost:3000/movesets")
+    //     .then(res => res.json())
+    //     .then(data => {
+    //             let newArray = data.filter((log) => parseInt(log.user_id) === parseInt(this.state.user_id))
+    //             this.setState(
+    //                 {
+    //                     allUsersLogs: newArray
+    //                 }
+    //             )
+    //         }
+    //     )
+    // )
+}
   
   render(){
     return (
@@ -14,10 +44,10 @@ class Menu extends Component {
         {this.props.viewingLogs ? 
               <>
                 <div>
-                <button align="left" onClick={() => this.props.viewLogs()}>Back to Menu</button>
                 <button className="solve" onClick={() => this.props.solve()}>Solve!</button>
+                <button align="left" onClick={() => this.props.viewLogs()}>Back to Menu</button>
                 </div>
-                {this.createMovesetComponents()}
+                <div className="movesetConatiner">{this.createMovesetComponents()}</div>
               </>
         :
             <>

@@ -660,6 +660,23 @@ class Layout extends Component {
             }
         )
     }
+
+    // delete = (id) => {
+    //     fetch(`http://localhost:3000/movesets/${id}`, {method: 'DELETE'})
+    //     .then(
+    //         fetch("http://localhost:3000/movesets")
+    //         .then(res => res.json())
+    //         .then(data => {
+    //                 let newArray = data.filter((log) => parseInt(log.user_id) === parseInt(this.state.user_id))
+    //                 this.setState(
+    //                     {
+    //                         allUsersLogs: newArray
+    //                     }
+    //                 )
+    //             }
+    //         )
+    //     )
+    // }
   
     render(){
     return (
@@ -687,14 +704,14 @@ class Layout extends Component {
             {/* <div className="blankBottom">{this.state.log.toString()} */}
                 <form>
                     <label>
-                        <textarea className="blankBottom"  onChange={() => null} wrap="hard" type="text" name="name" value={this.generateLogString()} />
+                        <textarea className="blankBottom" readOnly onChange={() => null} wrap="hard" type="text" name="name" value={this.generateLogString()} />
                     </label>
                 </form>
             {/* </div> */}
         </div>
       </div>
        <br></br>
-      <Menu execute={this.execute} allUsersLogs={this.state.allUsersLogs} viewingLogs={this.state.viewingLogs} username={this.state.username} viewLogs={this.viewLogs} submitLog={this.submitLog} clearLog={this.clearLog} logging={this.state.logging} orientation={this.state.orientation} beginLog={this.beginLog} pattern={this.pattern} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
+      <Menu delete={this.delete} execute={this.execute} allUsersLogs={this.state.allUsersLogs} viewingLogs={this.state.viewingLogs} username={this.state.username} viewLogs={this.viewLogs} submitLog={this.submitLog} clearLog={this.clearLog} logging={this.state.logging} orientation={this.state.orientation} beginLog={this.beginLog} pattern={this.pattern} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
     </> :
 
     // NOT LOGGED IN
