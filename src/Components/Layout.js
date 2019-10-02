@@ -660,23 +660,6 @@ class Layout extends Component {
             }
         )
     }
-
-    // delete = (id) => {
-    //     fetch(`http://localhost:3000/movesets/${id}`, {method: 'DELETE'})
-    //     .then(
-    //         fetch("http://localhost:3000/movesets")
-    //         .then(res => res.json())
-    //         .then(data => {
-    //                 let newArray = data.filter((log) => parseInt(log.user_id) === parseInt(this.state.user_id))
-    //                 this.setState(
-    //                     {
-    //                         allUsersLogs: newArray
-    //                     }
-    //                 )
-    //             }
-    //         )
-    //     )
-    // }
   
     render(){
     return (

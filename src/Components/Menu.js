@@ -8,35 +8,36 @@ class Menu extends Component {
     allUsersLogs: this.props.allUsersLogs
   }
 
-  componentDidUpdate(prevProps) {
-    // Typical usage (don't forget to compare props):
-    if (this.props.userID !== prevProps.userID) {
-      this.fetchData(this.props.userID);
-    }
-  }
-
   createMovesetComponents = () => {
     return this.props.allUsersLogs.map((moveset) => <Moveset delete={this.delete} execute={this.props.execute} moveset={moveset} set={moveset.set} key={moveset.id}/>)
   }
+
+  // componentDidUpdate(prevProps) {
+  //   // Typical usage (don't forget to compare props):
+  //   if (this.props === prevProps) {
+  //     this.setState({
+  //         allUsersLogs: this.props.allUsersLogs
+  //     })
+  //   }
+  //   console.log("update")
+  // }
       
   delete = (id) => {
-    console.log("over here!")
-
     fetch(`http://localhost:3000/movesets/${id}`, {method: 'DELETE'})
-    // .then(
-    //     fetch("http://localhost:3000/movesets")
-    //     .then(res => res.json())
-    //     .then(data => {
-    //             let newArray = data.filter((log) => parseInt(log.user_id) === parseInt(this.state.user_id))
-    //             this.setState(
-    //                 {
-    //                     allUsersLogs: newArray
-    //                 }
-    //             )
-    //         }
-    //     )
-    // )
-}
+    .then(
+        fetch("http://localhost:3000/movesets")
+        .then(res => res.json())
+        .then(data => {
+                let newArray = data.filter((log) => parseInt(log.user_id) === parseInt(this.state.user_id))
+                this.setState(
+                    {
+                        allUsersLogs: newArray
+                    }
+                )
+            }
+        )
+    )
+  }
   
   render(){
     return (
