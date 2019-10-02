@@ -10,6 +10,11 @@ class Menu extends Component {
             <button className="solve" onClick={() => this.props.solve()}>Solve!</button>
             <button className="" onClick={() => this.props.scramble()}>Scramble</button>
             <button className="" onClick={() => this.props.pattern()}>Pattern</button>
+            {this.props.logging ? 
+            <><button className="logging" onClick={(e) => this.props.submitLog(e)}>Submit Log </button>
+            <button className="" onClick={() => this.props.clearLog()}>Clear Log </button></>: 
+            <button className="notLogging" onClick={() => this.props.beginLog()}>Begin Log</button>}
+
         </div>
         <div>
             <button className="moveButton" onClick={(event) => this.props.moveFromButton(event, "U", this.props.orientation)}>U</button>

@@ -6,13 +6,14 @@ import '../App.css';
 // import moveSound from './lose.mp3';
 
 class Layout extends Component {
-    solvedState = () =>{
+    solvedState = () => {
         return {L: [["W", "W", "W"], ["W", "W", "W"], ["W", "W", "W"]],
                 B: [["O", "O", "O"], ["O", "O", "O"], ["O", "O", "O"]],
                 U: [["B", "B", "B"], ["B", "B", "B"], ["B", "B", "B"]],
                 F: [["R", "R", "R"], ["R", "R", "R"], ["R", "R", "R"]],
                 R: [["Y", "Y", "Y"], ["Y", "Y", "Y"], ["Y", "Y", "Y"]],
-                D: [["G", "G", "G"], ["G", "G", "G"], ["G", "G", "G"]]}   
+                D: [["G", "G", "G"], ["G", "G", "G"], ["G", "G", "G"]]
+            }                   
     }
 
     moveSet = () => {
@@ -26,7 +27,9 @@ class Layout extends Component {
 
     state = {
         orientation: this.solvedState(),
-        scrambling: false
+        scrambling: false, 
+        logging: false,
+        log: []
     }
 
     solve = () => {
@@ -104,13 +107,17 @@ class Layout extends Component {
                 clearInterval(t)
             }
             i += 1
-        }, 90)            
+        }, 90)      
+        
+        // if(this.state.logging){
+        //     let loggedMoves = [...this.state.log, key]
+        //     this.setState({
+        //         log: loggedMoves
+        //     })
+        // }      
     }
 
     rotate = (key, orientation) => {
-        // const loseSound = document.querySelector('.loseSound')
-        // loseSound.volume = '1'
-        // loseSound.play()
         if (key){
             if(key === "U"){
                 var nextOrientation = orientation
@@ -481,92 +488,152 @@ class Layout extends Component {
     move = (event, orientation, side) => {
         var nextOrientation = orientation
         event.preventDefault()
+        let key
 
         // 0 = leftClick // 2 = rightClick 
         if (event.button === 2 && side === "U"){
+            key = "U"
             nextOrientation = this.rotate("U", orientation)
         }
         if(event.button === 0 && side === "U"){
+            key = "UC"
             nextOrientation = this.rotate("UC", orientation)
         }
         if(event.button === 2 && side === "D"){
+            key = "D"
             nextOrientation = this.rotate("D", orientation)
         }
         if(event.button === 0 && side === "D"){
+            key = "DC"
             nextOrientation = this.rotate("DC", orientation)
         }
         if(event.button === 2 && side === "R"){
+            key = "R"
             nextOrientation = this.rotate("R", orientation)
         }
         if(event.button === 0 && side === "R"){
+            key = "RC"
             nextOrientation = this.rotate("RC", orientation)
         }
-        if(event.button === 2 && side === "L"){
+        if(event.button === 2 && side === "L"){            
+            key = "L"
             nextOrientation = this.rotate("L", orientation)
         }
         if(event.button === 0 && side === "L"){
+            key = "LC"
             nextOrientation = this.rotate("LC", orientation)
         }
         if(event.button === 2 && side === "B"){
+            key = "B"
             nextOrientation = this.rotate("B", orientation)
         }
         if(event.button === 0 && side === "B"){
+            key = "BC"
             nextOrientation = this.rotate("BC", orientation)
         }
         if(event.button === 2 && side === "F"){
+            key = "F"
             nextOrientation = this.rotate("F", orientation)
         }
         if(event.button === 0 && side === "F"){
+            key = "FC"
             nextOrientation = this.rotate("FC", orientation)
         }
 
         this.setState({
             orientation: nextOrientation
         })
+
+        if(this.state.logging){
+            let loggedMoves = [...this.state.log, key]
+            this.setState({
+                log: loggedMoves
+            })
+        }
         
     }
 
     moveFromButton = (event, key, orientation) => {
         event.preventDefault()
+
+        if(this.state.logging){
+            let loggedMoves = [...this.state.log, key]
+            this.setState({
+                log: loggedMoves
+            })
+        }
         this.setState({
-            orientation: this.rotate(key, orientation)
+            orientation: this.rotate(key, orientation), 
         })  
+    }
+
+    beginLog = () => {
+        this.setState({logging: !this.state.logging, log: []})
+    }
+
+    submitLog = (e) => {
+        const data = {
+            set: this.state.log.toString(),
+            user_id: 1
+        }
+        
+        fetch(url, {
+            method: 'POST', 
+            body: JSON.stringify(data), // data can be `string` or {object}
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          const json = await response.json();
+          console.log('Success:', JSON.stringify(json));
+        } catch (error) {
+          console.error('Error:', error);
+        }
+        this.setState({log: [], logging: false})
+
+    }
+
+    generateLogString = () => {
+        let string = this.state.log.toString().replace(/,/g, ", ")
+        string = string.replace(/C/g, "'").replace(/2/g, "⟵").replace(/3/g, "↑").replace(/1/g, "⟶").replace(/4/g, "↓").replace(/5/g, "⟳").replace(/6/g, "⟲")
+        return string
+    }
+
+    clearLog = () => {
+        this.setState({log: [], logging: false})
     }
   
     render(){
+        console.log(this.state.log)
     return (
     <>
-      {/* <div className="title">Rubik's Cube</div> */}
-      {/* <Menu orientation={this.state.orientation} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/> */}
-      {/* <div className="Header">        
-        <div id="content2">Rubik's Cube</div> 
-      </div> */}
       <div className="Layout" orientation={this.state.orientation}>
         <div className="column1">
-            {/* <button className="centerRowButton2" onClick={() => console.log("penguin")}></button> */}
             <Side face="L" move={this.move} orientation={this.state.orientation} sideOrientation={this.state.orientation.L}/>
         </div>
         <div className="column2">
-            {/* <button className="centerRowButton" onClick={() => console.log("penguin")}></button> */}
             <Side face="B" move={this.move} orientation={this.state.orientation} sideOrientation={this.state.orientation.B}/>
             <Side face="U" move={this.move} orientation={this.state.orientation} sideOrientation={this.state.orientation.U}/>
             <Side face="F" move={this.move} orientation={this.state.orientation} sideOrientation={this.state.orientation.F}/>
-            {/* <button className="centerRowButton" onClick={() => console.log("penguin")}></button> */}
         </div>
         <div className="column3">
-            {/* <div className="blankTop"></div> */}
+            <div className="blankTop"></div>
             <div className="blankMiddle">
                 <Side face="R" move={this.move} orientation={this.state.orientation} sideOrientation={this.state.orientation.R}/>
                 <Side face="D" move={this.move} orientation={this.state.orientation} sideOrientation={this.state.orientation.D}/>
             </div>
-            {/* <div className="blankBottom">
-                <Menu orientation={this.state.orientation} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
-            </div> */}
+            {/* <div className="blankBottom">{this.state.log.toString()} */}
+                <form>
+                    <label>
+                        <textarea className="blankBottom"  wrap="hard" type="text" name="name" value={this.generateLogString()} />
+                    </label>
+                </form>
+            {/* </div> */}
         </div>
-        {/* <Menu orientation={this.state.orientation} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/> */}
-
       </div>
-      <Menu orientation={this.state.orientation} pattern={this.pattern} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
+      {/* {this.state.log.toString()}  */}
+       <br></br>
+      <Menu submitLog={this.submitLog} clearLog={this.clearLog} logging={this.state.logging} orientation={this.state.orientation} beginLog={this.beginLog} pattern={this.pattern} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
     </>
     );
   }

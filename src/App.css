@@ -136,18 +136,33 @@
 .column3{
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  /* align-items: left; */
 }
 .blankTop{
-  background-color: rgb(231, 231, 231);
+  /* background-color: rgb(231, 231, 231); */
   margin: 5px;
-  height: 120px;
-  border: solid 20px;
+  height: 108px;
+  width: 270px;
+  border: solid 0px;
   border-color: rgb(231, 231, 231);
   padding: 20px;
 }
 .blankMiddle{
   display:flex;
   flex-direction: row;
+}
+.blankBottom{
+  /* background-color: rgb(231, 231, 231); */
+  margin: 5px;
+  height: 108px;
+  width: 270px;
+  border: solid 0px;
+  border-color: rgb(231, 231, 231);
+  padding: 20px;
+  font-family: 'Inconsolata', monospace;
+  font-weight: bold;
+  font-size: 20px;
 }
 .Menu{
   font-weight: bold;
@@ -196,15 +211,40 @@ button {
 
 button:hover {
   background-color: #0b2afb;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: rgb(255, 251, 0);
   /* transition-duration: 0.4s; */
   cursor: pointer;
   /* background-color: #0032bc; */
   border-color: #0b2afb;
   /* border-color:rgb(255, 251, 0); */
+}
 
+button:active{
+  background-color: rgb(255, 251, 0);
+  border-color: rgb(255, 251, 0);
+  color: black;
+}
 
+button.logging {
+  background-color: rgb(255, 251, 0);
+  border-color: rgb(255, 251, 0);
+}
+button.logging:hover {
+  background-color: #0b2afb;
+  /* font-weight: bold; */
+  color: rgb(255, 251, 0);
+  /* transition-duration: 0.4s; */
+  cursor: pointer;
+  /* background-color: #0032bc; */
+  border-color: #0b2afb;
+  /* border-color:rgb(255, 251, 0); */
+}
+button.logging:active {
+  background-color:  white;
+  border-color: black;
+  color: black;
+  font-family: 'Inconsolata', monospace;
 }
 
 button.moveButton{
@@ -228,23 +268,7 @@ button.moveButton:hover{
   color:rgb(255, 251, 0);
 }
 
-.Header{
-  font-weight: bold;
-  font-size: 25px;
-  /* color: rgb(255, 251, 0); */
-  color: rgb(255, 255, 255);
-  background-color: #000000;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  /* margin: 5px; */
-  /* height: 120px; */
-  /* border: solid 3px; */
-  border-color:black;
-  /* border-radius: 27px; */
-  /* padding: 20px; */
-  width: 637px;
+textarea {
+  resize: none;
 }
 
