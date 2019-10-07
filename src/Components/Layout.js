@@ -30,7 +30,7 @@ class Layout extends Component {
         logging: false,
         log: [],
         allUsersLogs: [],
-        loggedIn: false,
+        loggedIn: true,
         username: "",
         user_id: 0,
         viewingLogs: false
@@ -609,6 +609,7 @@ class Layout extends Component {
     }
 
     beginLog = () => {
+        console.log("hi")
         this.setState({logging: !this.state.logging, log: []})
     }
 
@@ -660,6 +661,21 @@ class Layout extends Component {
             }
         )
     }
+
+    updateAllUsersLogs = () => {
+        fetch("http://localhost:3000/movesets")
+        .then(res => res.json())
+        //FILTERS THROUGH ALL THE MOVESETS CREATED - RETURN A LIST OF THE CURRENT USER'S MOVESETS 
+        .then(data => {
+                let newArray = data.filter((log) => parseInt(log.user_id) === parseInt(this.state.user_id))
+                this.setState(
+                    {
+                        allUsersLogs: newArray
+                    }
+                )
+            }
+        )
+    }
   
     render(){
     return (
@@ -667,8 +683,56 @@ class Layout extends Component {
     {this.state.loggedIn ?
 
     // LOGGED IN
-    <>
-      {/* {this.state.allUsersLogs} */}
+    <>    
+      <div className="header">Rubiks Cube</div>
+      {/* //// MENU //// */}
+      <div id="buttons">
+        <div className="button" onClick={() => this.solve()}>Solve!</div>
+        <div className="button" onClick={() => this.scramble()}>Scramble</div>
+        <div className="button" onClick={() => this.pattern()}>Pattern</div>
+
+        {this.state.logging ? 
+        <><div className="button" onClick={(e) => this.submitLog(e)}>Submit Log </div>
+        <div className="button" onClick={() => this.clearLog()}>Clear Log </div></>:
+        <><div className="button" onClick={() => this.beginLog()}>Begin Log</div>
+        <div className="button" onClick={() => this.viewLogs()}>View Logs</div></>}
+      </div>
+      <div className= "moves">
+      <div className="movestoprow">
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "U", this.state.orientation)}>U</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "UC", this.state.orientation)}>U'</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "L", this.state.orientation)}>L</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "LC", this.state.orientation)}>L'</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "R", this.state.orientation)}>R</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "RC", this.state.orientation)}>R'</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "F", this.state.orientation)}>F</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "FC", this.state.orientation)}>F'</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "B", this.state.orientation)}>B</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "BC", this.state.orientation)}>B'</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "D", this.state.orientation)}>D</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "DC", this.state.orientation)}>D'</button>
+        </div>
+      
+      <div>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "X", this.state.orientation)}>X</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "XC", this.state.orientation)}>X'</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "Y", this.state.orientation)}>Y</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "YC", this.state.orientation)}>Y'</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "Z", this.state.orientation)}>Z</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "ZC", this.state.orientation)}>Z'</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "2", this.state.orientation)}>⟵</button>
+
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "3", this.state.orientation)}>↑</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "1", this.state.orientation)}>⟶</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "4", this.state.orientation)}>↓</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "5", this.state.orientation)}>⟳</button>
+            <button className="moveButton" onClick={(event) => this.moveFromButton(event, "6", this.state.orientation)}>⟲</button>
+            {/* ⇽⟳↑↓⇾ ← ⟶*/}
+        </div>
+      </div>
+      {/* //////// */}
+
+
       <div className="Layout" orientation={this.state.orientation}>
         <div className="column1">
             <Side face="L" move={this.move} orientation={this.state.orientation} sideOrientation={this.state.orientation.L}/>
@@ -694,7 +758,7 @@ class Layout extends Component {
         </div>
       </div>
        <br></br>
-      <Menu delete={this.delete} execute={this.execute} allUsersLogs={this.state.allUsersLogs} viewingLogs={this.state.viewingLogs} username={this.state.username} viewLogs={this.viewLogs} submitLog={this.submitLog} clearLog={this.clearLog} logging={this.state.logging} orientation={this.state.orientation} beginLog={this.beginLog} pattern={this.pattern} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/>
+      {/* <Menu updateAllUsersLogs={this.updateAllUsersLogs} execute={this.execute} allUsersLogs={this.state.allUsersLogs} viewingLogs={this.state.viewingLogs} username={this.state.username} viewLogs={this.viewLogs} submitLog={this.submitLog} clearLog={this.clearLog} logging={this.state.logging} orientation={this.state.orientation} beginLog={this.beginLog} pattern={this.pattern} scramble={this.scramble} solve={this.solve} moveFromButton={this.moveFromButton}/> */}
     </> :
 
     // NOT LOGGED IN

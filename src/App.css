@@ -1,47 +1,83 @@
 .App {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   font-family: 'Inconsolata', monospace;
-
-}
-.title {
-  font-size: calc(10px + 2vmin);
-  margin-top: 10px;
-  font-weight: bold;
-  color: #0032bc;
-}
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: column;
+  /* text-align: center; */
+  align-items: center;
+
+
 }
 
-.App-link {
-  color: #09d3ac;
+.header {
+  font-family: 'Inconsolata', monospace;
+  background-color: black;
+  color: white;
+  font-size: 25px;
+  /* margin: 4px; */
+  padding: 5px;
+  padding-left: 10px;
+  width: 60%;
+  margin-top: 3px;
+  /* color:rgb(255, 251, 0); */
+
+}
+
+#buttons {
+  position: relative;
+  width: 60%;
+  height: 30px;
+  margin-top: 20px;
+  /* margin-left: 4px; */
+  color: white;
+  text-decoration: none;
+  margin-bottom: 0px;
+}
+
+.button {
+  font-family: 'Inconsolata', monospace;
+  position: relative;
+  margin-right: 3px;
+  text-decoration: none;
+  margin-top: 3px;
+  background-color: black;
+  color: white;
+  width: calc(100% / 5 - 4px );
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  outline: none;
+  font-size: 16px;
+  padding-bottom: 0px;
+}
+
+.button:hover {
+  background-color: rgb(255, 251, 0);
+  color:black;
+  cursor: pointer;
+  outline: none;
+}
+
+.moves {
+  /* border: solid 3px; */
+  padding: 5px;
+  width: 50%;
+  text-align: center;
+
+}
+.movestoprow{
+  margin-bottom:0px
 }
 
 .Layout{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
   /* border: solid; */
   /* border-radius: 10px; */
-  padding: 20px;
-  margin-top: 2%;
+  padding: 0px;
+  /* margin-top: 2%; */
   width: auto;
 }
 
@@ -105,24 +141,6 @@
 .tile#O {
   background-color: #fd8824;
 }
-/* .tile#B {
-  background-color: #0b2afb;
-}
-.tile#R {
-  background-color: #a11818;
-}
-.tile#Y {
-  background-color: #e2d523;
-}
-.tile#W {
-  background-color: #ffffff;
-}
-.tile#G {
-  background-color: #478b2c;
-}
-.tile#O {
-  background-color: #cf7f07;
-} */
 
 /* Columns */
 .column1{
@@ -186,6 +204,7 @@
   /* margin-bottom: 10px; */
 }
 div#content{
+  margin-top: 10px;
   margin-bottom: 10px;
   color:rgb(255, 251, 0);
 
@@ -195,83 +214,33 @@ div#content2{
   color:rgb(255, 255, 255);
 
 }
-button {
-  outline: none;
-  font-family: 'Inconsolata', monospace;
-  /* font-weight: bold; */
-  background-color: white;
-  color: black;
-  border: 2px solid black;
-  padding: 4px;
-  padding-right:15px;
-  padding-left:15px;
-  font-size: 16px;
-  margin-right: 5px;
-  margin-left: 5px;
-  margin-bottom: 8px;
-}
-
-button:hover {
-  background-color: #0b2afb;
-  /* font-weight: bold; */
-  color: rgb(255, 251, 0);
-  /* transition-duration: 0.4s; */
-  cursor: pointer;
-  /* background-color: #0032bc; */
-  border-color: #0b2afb;
-  /* border-color:rgb(255, 251, 0); */
-}
-
-button:active{
-  background-color: rgb(255, 251, 0);
-  border-color: rgb(255, 251, 0);
-  color: black;
-}
-
-button.logging {
-  background-color: rgb(255, 251, 0);
-  border-color: rgb(255, 251, 0);
-}
-button.logging:hover {
-  background-color: #0b2afb;
-  /* font-weight: bold; */
-  color: rgb(255, 251, 0);
-  /* transition-duration: 0.4s; */
-  cursor: pointer;
-  /* background-color: #0032bc; */
-  border-color: #0b2afb;
-  /* border-color:rgb(255, 251, 0); */
-}
-button.logging:active {
-  background-color:  white;
-  border-color: black;
-  color: black;
-  font-family: 'Inconsolata', monospace;
-}
 
 button.moveButton{
   font-family: 'Inconsolata', monospace;
   font-weight: bold;
-  background-color: #0b2afb;
-  color: white;
+  background-color: white;
+  height: 50px;
+  width: 50px;
+  color: black;
   border: 0px solid black;
   padding: 0px;
   padding-right:15px;
   padding-left:15px; 
   font-size: 20px;
-  margin-right: 0px;
-  margin-left: 0px;
+  margin: 5px;
+  margin-bottom: 3px; 
 }
 
 button.moveButton:hover{
-  color: black;
-  /* transition-duration: 0.4s; */
+
   cursor: pointer;
   color:rgb(255, 251, 0);
 }
 
 textarea {
   resize: none;
+  /* background-color: black; */
+  /* color: white; */
 }
 
 .logIn {
@@ -350,6 +319,11 @@ div.movesetConatiner{
   display:flex;
   flex-direction: column;
   justify-content: flex-end;
+}
+div.no-logs{
+  margin-bottom: 20px;
+  margin-top: 20px;
+
 }
 
 
