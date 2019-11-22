@@ -46,7 +46,7 @@ class Layout extends Component {
 
         const data = {name: this.state.username}
                 
-        fetch("http://localhost:3000/users", {
+        fetch("https://quiet-fortress-91626.herokuapp.com/users", {
             method: 'POST', 
             body: JSON.stringify(data), // data can be `string` or {object}
             headers: {
@@ -54,7 +54,7 @@ class Layout extends Component {
                 'Content-Type': 'application/json'
             }
         })
-        .then(fetch("http://localhost:3000/users")
+        .then(fetch("https://quiet-fortress-91626.herokuapp.com/users")
         .then(res => res.json())
                                                               // GRABS THE LAST USER (MOST RECENT LOGIN)
         .then(data => this.setState({loggedIn: true, user_id: data[data.length-1].id})))
@@ -622,7 +622,7 @@ class Layout extends Component {
                 // NEEDS TO BE THE ID OF USER THATS LOGGED IN 
             }
                     
-            fetch("http://localhost:3000/movesets", {
+            fetch("https://quiet-fortress-91626.herokuapp.com/movesets", {
                 method: 'POST', 
                 body: JSON.stringify(data), // data can be `string` or {object}
                 headers: {
@@ -647,7 +647,7 @@ class Layout extends Component {
     }
 
     viewLogs = () => {
-        fetch("http://localhost:3000/movesets")
+        fetch("https://quiet-fortress-91626.herokuapp.com/movesets")
         .then(res => res.json())
         //FILTERS THROUGH ALL THE MOVESETS CREATED - RETURN A LIST OF THE CURRENT USER'S MOVESETS 
         .then(data => {
@@ -663,7 +663,7 @@ class Layout extends Component {
     }
 
     updateAllUsersLogs = () => {
-        fetch("http://localhost:3000/movesets")
+        fetch("https://quiet-fortress-91626.herokuapp.com/movesets")
         .then(res => res.json())
         //FILTERS THROUGH ALL THE MOVESETS CREATED - RETURN A LIST OF THE CURRENT USER'S MOVESETS 
         .then(data => {
@@ -676,7 +676,7 @@ class Layout extends Component {
             }
         )
     }
-  
+    
     render(){
     return (
     <>
