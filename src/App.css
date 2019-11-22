@@ -17,17 +17,17 @@
   /* margin: 4px; */
   padding: 5px;
   padding-left: 10px;
-  width: 60%;
+  width: 725px;
   margin-top: 3px;
-  /* color:rgb(255, 251, 0); */
+  text-align: left;
 
 }
 
 #buttons {
   position: relative;
-  width: 60%;
+  width: 750px;
   height: 30px;
-  margin-top: 20px;
+  margin-top: 10px;
   /* margin-left: 4px; */
   color: white;
   text-decoration: none;
@@ -42,7 +42,7 @@
   margin-top: 3px;
   background-color: black;
   color: white;
-  width: calc(100% / 5 - 4px );
+  width: calc(100% / 3 - 6px );
   display: inline-block;
   height: 30px;
   line-height: 30px;
@@ -62,10 +62,10 @@
 .moves {
   /* border: solid 3px; */
   padding: 5px;
-  width: 50%;
+  width: 1000px;
   text-align: center;
-
 }
+
 .movestoprow{
   margin-bottom:0px
 }
@@ -219,22 +219,28 @@ button.moveButton{
   font-family: 'Inconsolata', monospace;
   font-weight: bold;
   background-color: white;
-  height: 50px;
+  height: 30px;
   width: 50px;
   color: black;
   border: 0px solid black;
   padding: 0px;
   padding-right:15px;
   padding-left:15px; 
-  font-size: 20px;
+  font-size: 16px;
   margin: 5px;
   margin-bottom: 3px; 
+  outline: none;
 }
 
 button.moveButton:hover{
-
+  outline:none;
   cursor: pointer;
-  color:rgb(255, 251, 0);
+  color:blue;
+}
+button.moveButton:active{
+  outline:none;
+  cursor: pointer;
+  color:yellow;
 }
 
 textarea {

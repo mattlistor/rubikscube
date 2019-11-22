@@ -691,12 +691,13 @@ class Layout extends Component {
         <div className="button" onClick={() => this.scramble()}>Scramble</div>
         <div className="button" onClick={() => this.pattern()}>Pattern</div>
 
-        {this.state.logging ? 
+        {/* {this.state.logging ? 
         <><div className="button" onClick={(e) => this.submitLog(e)}>Submit Log </div>
         <div className="button" onClick={() => this.clearLog()}>Clear Log </div></>:
         <><div className="button" onClick={() => this.beginLog()}>Begin Log</div>
-        <div className="button" onClick={() => this.viewLogs()}>View Logs</div></>}
+        <div className="button" onClick={() => this.viewLogs()}>View Logs</div></>} */}
       </div>
+
       <div className= "moves">
       <div className="movestoprow">
             <button className="moveButton" onClick={(event) => this.moveFromButton(event, "U", this.state.orientation)}>U</button>
