@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/rubikscube/static/css/main.4aa81a18.chunk.css",
+    "main.js": "/rubikscube/static/js/main.a64e7cb7.chunk.js",
+    "main.js.map": "/rubikscube/static/js/main.a64e7cb7.chunk.js.map",
+    "runtime-main.js": "/rubikscube/static/js/runtime-main.5150a666.js",
+    "runtime-main.js.map": "/rubikscube/static/js/runtime-main.5150a666.js.map",
+    "static/js/2.81d6ac9a.chunk.js": "/rubikscube/static/js/2.81d6ac9a.chunk.js",
+    "static/js/2.81d6ac9a.chunk.js.map": "/rubikscube/static/js/2.81d6ac9a.chunk.js.map",
+    "index.html": "/rubikscube/index.html",
+    "precache-manifest.e5730b4b003060b2f5152009b53e5856.js": "/rubikscube/precache-manifest.e5730b4b003060b2f5152009b53e5856.js",
+    "service-worker.js": "/rubikscube/service-worker.js",
+    "static/css/main.4aa81a18.chunk.css.map": "/rubikscube/static/css/main.4aa81a18.chunk.css.map"
+  }
+}
